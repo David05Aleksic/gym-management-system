@@ -7,6 +7,16 @@
         exit();
     }
 
+    $admin_id = $_SESSION['admin_id'];
+
+    $sql = "SELECT username FROM admins WHERE admin_id = ?";
+    $stmt_admin = $con->prepare($sql);
+    $stmt_admin->bind_param("i", $admin_id);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
+    $admin_data = $result_admin->fetch_assoc();
+    $username = $admin_data['username'] ?? "Unknown";
+
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +37,28 @@
     </div>
     <?php unset($_SESSION['success_message']); ?>
 <?php endif; ?>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <span class="nav-link text-white">
+                        Logged in as <b> <?= htmlspecialchars($username); ?> </b>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-outline-light ms-3" href="logout.php">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
 <div class="container mt-4">
 
@@ -185,7 +217,7 @@
 Dropzone.options.dropzoneUpload = {
     url: "upload_photo.php",
     paramName: "photo",
-    maxFilesize: 20, // MB
+    maxFilesize: 20, 
     acceptedFiles: "image/*",
     init: function () {
         this.on("success", function (file, response) {
