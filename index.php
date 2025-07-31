@@ -8,7 +8,7 @@
         $password = $_POST['password'];
         $sql = "SELECT admin_id, password FROM admins WHERE username = ?";
 
-        $execute = $con->prepare($sql); n
+        $execute = $con->prepare($sql); 
         $execute->bind_param("s", $username); 
         $execute->execute();
 
@@ -52,11 +52,20 @@
 </head>
 <body class="bg-light">
 
+    <?php if(isset($_SESSION['message'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($_SESSION['message']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
+
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow p-4" style="min-width: 350px;">
             <h3 class="text-center mb-4">Admin Login</h3>
 
             <?php
+
                 if (isset($_SESSION['error'])) {
                     echo '<div class="alert alert-danger text-center">' . $_SESSION['error'] . '</div>';
                     unset($_SESSION['error']);
@@ -81,5 +90,6 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
