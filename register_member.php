@@ -19,7 +19,7 @@
         }
 
         $phone_number = trim($_POST['phone_number']);
-        $phone_number = preg_replace("/[^0-9+]/", "", $phone_number); // dozvoli brojeve i + znak
+        $phone_number = preg_replace("/[^0-9+]/", "", $phone_number); 
 
         $photo_path = htmlspecialchars($_POST['photo_path']);
 
@@ -41,16 +41,16 @@
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 16);
 
-        $pdf->Cell(40, 10, 'Access Card'); //pisace Access Card na vrhu pdf dokumenta
+        $pdf->Cell(40, 10, 'Access Card'); 
         $pdf->Ln();
-        $pdf->Cell(40, 10,'Member ID: ' . $member_id); //upisujemo podatke u pdf dokument
+        $pdf->Cell(40, 10,'Member ID: ' . $member_id); 
         $pdf->Ln();
-        $pdf->Cell(40, 10,'Name: ' . $first_name . " " . $last_name); //40 i 10 su sirina i duzina celije 
+        $pdf->Cell(40, 10,'Name: ' . $first_name . " " . $last_name);
         $pdf->Ln();
         $pdf->Cell(40, 10,'Email: ' . $email);
         $pdf->Ln();
         
-        $filename = 'access_cards/access_card_' . $member_id . '.pdf'; //gde cemo da sacuvamo ovo
+        $filename = 'access_cards/access_card_' . $member_id . '.pdf'; 
         $pdf->Output('F', $filename);
 
         $sql = "UPDATE members SET access_card_pdf_path = '$filename' WHERE member_id = '$member_id'";
