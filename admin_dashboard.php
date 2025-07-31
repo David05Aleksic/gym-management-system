@@ -98,7 +98,7 @@
                                     <td><a target="_blank" href="<?php echo htmlspecialchars($result['access_card_pdf_path']); ?>">Access Card</a></td>
                                     <td> <?php
                                         $created_at = strtotime($result['created_at']);
-                                        $new_date = date("F, jS Y", $created_at); // F-mesec, j-dan S-nastavak Y-godina
+                                        $new_date = date("F, jS Y", $created_at); 
                                         echo $new_date; 
                                      ?> </td>
                                     <td>
@@ -171,7 +171,7 @@
                         <?php
                             $sql = "SELECT * FROM training_plans";
                             $execute = $con->query($sql);
-                            $results = $execute->fetch_all(MYSQLI_ASSOC); //fetch_all se koristi kada treba vise podataka iz asocijativnog niza da insertujemo
+                            $results = $execute->fetch_all(MYSQLI_ASSOC); 
 
                             foreach($results as $result) {
 
