@@ -36,11 +36,11 @@
 
         $results = $execute->fetch_all(MYSQLI_ASSOC);
 
-        $output = fopen('php://output', 'w'); // otvaramo trenutni/virtuelni fajl
+        $output = fopen('php://output', 'w'); 
         header("Content-Type: text/csv");
         header('Content-Disposition: attachment; filename=' . $_GET['what'] . '.csv');
 
-        fputcsv($output, $csv_cols); //prvo ubacujemo kolone
+        fputcsv($output, $csv_cols); 
 
         foreach($results as $result) {
             fputcsv($output, $result);
