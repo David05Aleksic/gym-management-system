@@ -10,7 +10,6 @@
         $execute->bind_param("i", $member_id);
         $message = "";
 
-        //i izvrsava ga i proverava da li je izvrseno
         if($execute->execute()) {
             $message = "Member deleted";
         } else {
