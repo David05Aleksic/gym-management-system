@@ -1,6 +1,11 @@
 <?php
 
     require_once "config.php"; 
+
+    if(isset($_SESSION['admin_id'])) {
+            header("Location: admin_dashboard.php");
+            exit();
+        }
     
     if($_SERVER['REQUEST_METHOD'] === "POST") {
         $username = trim($_POST['username']);
