@@ -1,6 +1,6 @@
 <?php
 
-    require_once "config.php"; //ucitavamo fajl config.php
+    require_once "config.php"; 
     
     if($_SERVER['REQUEST_METHOD'] === "POST") {
         $username = trim($_POST['username']);
@@ -8,15 +8,15 @@
         $password = $_POST['password'];
         $sql = "SELECT admin_id, password FROM admins WHERE username = ?";
 
-        $execute = $con->prepare($sql); //preparing sql for execution
-        $execute->bind_param("s", $username); //s-string, passing $username instead of ? in $sql
+        $execute = $con->prepare($sql); n
+        $execute->bind_param("s", $username); 
         $execute->execute();
 
         $results = $execute->get_result();
 
         if($results->num_rows == 1) {
 
-            $admin = $results->fetch_assoc(); //iz rezultata ucitavamo podatke iz baze u formi asocijativnog niza u $admin
+            $admin = $results->fetch_assoc(); 
                 
             if(password_verify($password, $admin["password"])) {
                 $_SESSION['admin_id'] = $admin['admin_id'];
